@@ -5,6 +5,7 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import api from "../../Services/api";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const eventColors = {};
 
@@ -19,6 +20,7 @@ const getColor = (eventTitle) => {
 const SchedulerCalendar = () => {
   const { token } = useSelector((state) => state.auth);
   const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchAllSchedules();
@@ -26,6 +28,7 @@ const SchedulerCalendar = () => {
   }, []);
 
   const fetchAllSchedules = async () => {
+    setLoading(true);
     try {
       const res = await api.get("/schedule/all-event-schedules", {
         headers: {
@@ -44,12 +47,21 @@ const SchedulerCalendar = () => {
           eventTitle: item.eventTitle,
         },
       }));
-      console.log(formatted);
+      //console.log(formatted);
       setEvents(formatted);
+      setLoading(false);
     } catch (error) {
-      console.error("Failed to load all schedules", error);
+      toast.error("Failed to load all schedules", error);
     }
   };
+
+  if (loading) {
+    return (
+      <div className="flex h-[80vh] items-center justify-center text-lime-600">
+        <ClipLoader color="#00897B" size="40" />
+      </div>
+    );
+  }
 
   return (
     <div className="bg-white mt-14 max-w-6xl p-10 rounded-lg shadow">

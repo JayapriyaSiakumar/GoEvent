@@ -2,14 +2,17 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import api from "../../Services/api";
 import { toast } from "react-toastify";
+import { ClipLoader } from "react-spinners";
 
 const AllPayments = () => {
   const [payments, setPayments] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const { token } = useSelector((state) => state.auth);
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       try {
         const response = await api.get(`/dashboard/payments`, {
           headers: {
@@ -18,6 +21,7 @@ const AllPayments = () => {
         });
 
         setPayments(response.data.data);
+        setLoading(false);
         //toast.success("Dashboard Data Fetched Successfully");
       } catch (error) {
         toast.error("Something Went Wrong", error);
@@ -26,6 +30,15 @@ const AllPayments = () => {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  if (loading) {
+    return (
+      <div className="flex h-[80vh] items-center justify-center text-lime-600">
+        <ClipLoader color="#00897B" size="40" />
+      </div>
+    );
+  }
+
   return (
     <div className="mt-14 p-10">
       <h1 className="text-3xl font-bold mb-4">Payments</h1>

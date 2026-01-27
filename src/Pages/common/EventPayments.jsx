@@ -32,7 +32,9 @@ const EventPayments = ({ eventId }) => {
       <h3 className="text-xl font-semibold mt-8 mb-4">Payments</h3>
       <p className="mb-3 font-medium">Total Revenue: ₹{totalRevenue}</p>
       {loading ? (
-        <p>Loading attendees...</p>
+        <div className="flex h-[80vh] items-center justify-center text-lime-600">
+          <ClipLoader color="#00897B" size="40" />
+        </div>
       ) : payments?.length === 0 ? (
         <p className="text-gray-500">No payments yet</p>
       ) : (

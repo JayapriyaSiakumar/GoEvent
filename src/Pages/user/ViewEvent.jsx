@@ -286,7 +286,9 @@ const ViewEvent = () => {
                     </h3>
 
                     {loading ? (
-                      <p>Loading attendees...</p>
+                      <div className="flex h-[80vh] items-center justify-center text-lime-600">
+                        <ClipLoader color="#00897B" size="40" />
+                      </div>
                     ) : attendees.length === 0 ? (
                       <p className="text-gray-500">No attendees yet</p>
                     ) : (

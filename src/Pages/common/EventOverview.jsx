@@ -184,7 +184,13 @@ const EventOverview = ({ eventId }) => {
     }
   };
 
-  if (!event) return <p>Loading event...</p>;
+  if (!event) {
+    return (
+      <div className="flex h-[80vh] items-center justify-center text-lime-600">
+        <ClipLoader color="#00897B" size="40" />
+      </div>
+    );
+  }
 
   return (
     <>

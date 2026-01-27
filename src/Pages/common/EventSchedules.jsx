@@ -17,7 +17,10 @@ const EventSchedules = ({ eventId }) => {
     speaker: "",
   };
   const [formData, setFormData] = useState(initialFormState);
+  const [loading, setLoading] = useState(false);
+
   const fetchData = async () => {
+    setLoading;
     try {
       const response = await api.get(`/schedule/all/${eventId}`, {
         headers: {
@@ -26,6 +29,7 @@ const EventSchedules = ({ eventId }) => {
       });
 
       setSchedules(response.data.data);
+      setLoading(false);
       //toast.success("Data Fetched Successfully");
     } catch (error) {
       toast.error("Something Went Wrong", error);
@@ -119,6 +123,14 @@ const EventSchedules = ({ eventId }) => {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  if (loading) {
+    return (
+      <div className="flex h-[80vh] items-center justify-center text-lime-600">
+        <ClipLoader color="#00897B" size="40" />
+      </div>
+    );
+  }
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-lg">

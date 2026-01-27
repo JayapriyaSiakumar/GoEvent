@@ -10,6 +10,12 @@ import {
 } from "recharts";
 
 const PaymentChart = ({ data }) => {
+  if (data.length === 0)
+    return (
+      <div className="bg-white p-6 rounded-xl flex justify-center items-center text-2xl w-full">
+        No Data Found
+      </div>
+    );
   return (
     <div className="bg-white p-6 rounded-xl shadow">
       <h2 className="font-semibold mb-4">Payment Trend</h2>

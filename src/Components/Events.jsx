@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { setEvents } from "../Redux/Features/eventSlice";
 import FilterForm from "./FilterForm";
 import { HiAdjustmentsHorizontal } from "react-icons/hi2";
+import { ClipLoader } from "react-spinners";
 
 const Events = () => {
   const dispatch = useDispatch();
@@ -77,7 +78,13 @@ const Events = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (loading) return <p className="text-center">Loading events...</p>;
+  if (loading) {
+    return (
+      <div className="flex h-[80vh] items-center justify-center text-lime-600">
+        <ClipLoader color="#00897B" size="40" />
+      </div>
+    );
+  }
   if (error) return <p className="text-center text-red-500">{error}</p>;
 
   return (

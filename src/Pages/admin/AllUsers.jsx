@@ -6,9 +6,11 @@ import api from "../../Services/api";
 const AllUsers = () => {
   const [users, setUsers] = useState([]);
   const { token } = useSelector((state) => state.auth);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       try {
         const response = await api.get(`/auth/users`, {
           headers: {
@@ -17,6 +19,7 @@ const AllUsers = () => {
         });
 
         setUsers(response.data.data);
+        setLoading(false);
         //toast.success("Dashboard Data Fetched Successfully");
       } catch (error) {
         toast.error("Something Went Wrong", error);
@@ -26,9 +29,17 @@ const AllUsers = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  if (loading) {
+    return (
+      <div className="flex h-[80vh] items-center justify-center text-lime-600">
+        <ClipLoader color="#00897B" size="40" />
+      </div>
+    );
+  }
+
   return (
     <div className="mt-14 p-10">
-        <h1 className="text-3xl font-bold mb-4">Users</h1>
+      <h1 className="text-3xl font-bold mb-4">Users</h1>
       <table className="min-w-full divide-y divide-gray-200 overflow-x-auto">
         <thead className="bg-gray-50">
           <tr>

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setMyBookings,
@@ -12,8 +12,10 @@ const MyBookings = () => {
   const dispatch = useDispatch();
   const { token } = useSelector((state) => state.auth);
   const { bookings } = useSelector((state) => state.bookings);
+  const [loading, setLoading] = useState(false);
 
   const fetchMyBookings = async (token) => {
+    setLoading(true);
     const { data } = await api.get("/bookings/my-bookings", {
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -36,6 +38,7 @@ const MyBookings = () => {
       try {
         const data = await fetchMyBookings(token);
         dispatch(setMyBookings(data));
+        setLoading(false);
       } catch (error) {
         toast.error(error.response?.data?.message || "Failed to load booking");
       }
@@ -56,6 +59,13 @@ const MyBookings = () => {
       toast.error(error.response?.data?.message || "Failed to cancel booking");
     }
   };
+  if (loading) {
+    return (
+      <div className="flex h-[80vh] items-center justify-center text-lime-600">
+        <ClipLoader color="#00897B" size="40" />
+      </div>
+    );
+  }
 
   return (
     <div className="p-4  mt-14">
