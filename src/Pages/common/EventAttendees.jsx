@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import api from "../../Services/api";
+import { ClipLoader } from "react-spinners";
 
 const EventAttendees = ({ eventId }) => {
   const { role, token } = useSelector((state) => state.auth);
@@ -31,7 +32,9 @@ const EventAttendees = ({ eventId }) => {
       </h3>
 
       {loading ? (
-        <p>Loading attendees...</p>
+        <div className="flex h-[80vh] items-center justify-center text-lime-600">
+          <ClipLoader color="#00897B" size="40" />
+        </div>
       ) : attendees.length === 0 ? (
         <p className="text-gray-500">No attendees yet</p>
       ) : (

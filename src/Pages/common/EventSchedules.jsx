@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import api from "../../Services/api";
 import { toast } from "react-toastify";
 import { formatTimeAMPM, toTimeInputValue } from "../../Utils/date";
+import { ClipLoader } from "react-spinners";
 
 const EventSchedules = ({ eventId }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
