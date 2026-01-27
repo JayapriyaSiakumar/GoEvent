@@ -296,7 +296,7 @@ const EventSchedules = ({ eventId }) => {
 
       {/* Schedule List */}
 
-      {schedules === null || schedules?.length === 0 ? (
+      {(loading === false && schedules === null) || schedules?.length === 0 ? (
         <div className="flex justify-center items-center w-full h-1/2">
           {" "}
           <h2 className="text-xl font-bold text-gray-800">
