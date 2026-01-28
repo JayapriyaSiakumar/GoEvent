@@ -83,7 +83,7 @@ const Profile = () => {
       );
 
       toast.success(response.data.message);
-      navigate("/dashboard");
+      navigate("/");
     } catch (error) {
       setError(error.response.data.message);
       toast.error(error.response.data.message);
