@@ -77,7 +77,7 @@ const SchedulerCalendar = () => {
         </>
       ) : (
         <>
-          <div className="grid grid-cols-1 gap-4 m-auto  p-10  max-w-6xl">
+          <div className="grid grid-cols-1 gap-4 m-auto  p-10 w-full max-w-6xl">
             <FullCalendar
               plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
               initialView="dayGridMonth"
