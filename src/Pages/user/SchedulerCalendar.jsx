@@ -6,6 +6,7 @@ import interactionPlugin from "@fullcalendar/interaction";
 import api from "../../Services/api";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { ClipLoader } from "react-spinners";
 
 const eventColors = {};
 
