@@ -40,10 +40,10 @@ const AllPayments = () => {
   }
 
   return (
-    <div className="mt-14 p-10">
+    <div className="mt-14 p-10 w-full max-w-7xl">
       <h1 className="text-3xl font-bold mb-4">Payments</h1>
       {payments.length === 0 ? (
-        <div className="flex justify-center items-center w-full h-1/2">
+        <div className="flex justify-center items-center w-full h-2/3">
           {" "}
           <h2 className="text-xl font-bold text-gray-800">
             No Payments Found.

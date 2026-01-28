@@ -21,7 +21,7 @@ const EventSchedules = ({ eventId }) => {
   const [loading, setLoading] = useState(false);
 
   const fetchData = async () => {
-    setLoading;
+    setLoading(true);
     try {
       const response = await api.get(`/schedule/all/${eventId}`, {
         headers: {
@@ -296,7 +296,7 @@ const EventSchedules = ({ eventId }) => {
 
       {/* Schedule List */}
 
-      {loading === false && schedules?.length === 0 ? (
+      {schedules?.length === 0 ? (
         <div className="flex justify-center items-center w-full h-1/2">
           {" "}
           <h2 className="text-xl font-bold text-gray-800">

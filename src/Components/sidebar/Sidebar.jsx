@@ -55,7 +55,7 @@ const Sidebar = () => {
                 {role}
               </span>
               <img
-                className="w-8 h-8 rounded-full"
+                className="w-8 h-8 rounded-full object-cover"
                 src={
                   user?.profileImage ||
                   "https://cdn-icons-png.flaticon.com/512/12225/12225935.png"
