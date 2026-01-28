@@ -65,30 +65,32 @@ const SchedulerCalendar = () => {
   }
 
   return (
-    <div className="bg-white mt-14 max-w-6xl p-10 flex justify-center items-center h-screen rounded-lg shadow">
-      <h2 className="text-xl font-semibold mb-4">📅 All Events Schedule</h2>
+    <div className="bg-white mt-14  flex items-center flex-col justify-center w-full rounded-lg ">
+      <div className="grid grid-cols-1 gap-4 m-auto  p-10  max-w-6xl">
+        <h2 className="text-xl font-semibold mb-4">📅 All Events Schedule</h2>
 
-      <FullCalendar
-        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-        initialView="dayGridMonth"
-        headerToolbar={{
-          left: "prev,next today",
-          center: "title",
-          right: "dayGridMonth,timeGridWeek,timeGridDay",
-        }}
-        events={events}
-        eventClick={(info) => {
-          alert(
-            `🎫 Event: ${info.event.extendedProps.eventTitle}
+        <FullCalendar
+          plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+          initialView="dayGridMonth"
+          headerToolbar={{
+            left: "prev,next today",
+            center: "title",
+            right: "dayGridMonth,timeGridWeek",
+          }}
+          events={events}
+          eventClick={(info) => {
+            alert(
+              `🎫 Event: ${info.event.extendedProps.eventTitle}
 📌 Session: ${info.event.title}
 🎤 Speaker: ${info.event.extendedProps.speaker || "N/A"}
 📝 ${info.event.extendedProps.description || "No description"}`,
-          );
-        }}
-        height="auto"
-      />
+            );
+          }}
+          height="auto"
+        />
+      </div>
     </div>
   );
 };
-
+/* ,timeGridDay */
 export default SchedulerCalendar;
