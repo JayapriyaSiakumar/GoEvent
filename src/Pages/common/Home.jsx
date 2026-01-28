@@ -20,7 +20,7 @@ const Home = () => {
 
   return (
     <>
-      <div class="fixed top-0 z-50 w-full bg-teal-600  text-white shadow-lg">
+      <div className="fixed top-0 z-50 w-full bg-teal-600  text-white shadow-lg">
         <div className="mx-auto max-w-7xl px-6 sm:px-6 lg:px-8 ">
           <div className="relative flex h-16 justify-between">
             <div className="flex flex-1 items-stretch justify-start">

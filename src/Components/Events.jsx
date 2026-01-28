@@ -56,7 +56,6 @@ const Events = () => {
     setLoading(true);
     try {
       const res = await api.get("/event/all-published-events");
-
       dispatch(setEvents(res.data.events));
       setLoading(false);
     } catch (err) {
@@ -83,7 +82,7 @@ const Events = () => {
   if (loading) {
     return (
       <div className="flex h-[80vh] items-center justify-center text-lime-600">
-        <ClipLoader color="#00897B" size="40" />
+        <ClipLoader color="#00897B" size="40px" />
       </div>
     );
   }

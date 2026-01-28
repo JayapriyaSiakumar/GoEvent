@@ -59,7 +59,7 @@ const SchedulerCalendar = () => {
   if (loading) {
     return (
       <div className="flex h-[80vh] items-center justify-center text-lime-600">
-        <ClipLoader color="#00897B" size="40" />
+        <ClipLoader color="#00897B" size="40px" />
       </div>
     );
   }
@@ -77,7 +77,7 @@ const SchedulerCalendar = () => {
         </>
       ) : (
         <>
-          <div className="grid grid-cols-1 gap-4 m-auto  p-10 w-full max-w-6xl">
+          <div className=" m-auto  w-full max-w-6xl">
             <FullCalendar
               plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
               initialView="dayGridMonth"

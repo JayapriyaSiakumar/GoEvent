@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import api from "../../Services/api";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { ClipLoader } from "react-spinners";
 
 const Logout = () => {
   const navigate = useNavigate();
@@ -34,8 +35,8 @@ const Logout = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Logout</h1>
+    <div className="flex h-[80vh] items-center justify-center text-lime-600">
+      <ClipLoader color="#00897B" size="40px" />
     </div>
   );
 };

@@ -163,7 +163,7 @@ const EditEvent = () => {
         {error && <p className="text-red-500 mb-4">{error}</p>}
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          <div class="grid gap-6 mb-6 md:grid-cols-2"></div>
+          <div className="grid gap-6 mb-6 md:grid-cols-2"></div>
 
           <div className="">
             <label

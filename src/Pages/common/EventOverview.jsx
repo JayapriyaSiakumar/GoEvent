@@ -20,6 +20,7 @@ const EventOverview = ({ eventId }) => {
   const { role, token } = useSelector((state) => state.auth);
   /*  const [attendees, setAttendees] = useState([]);*/
   const [loading, setLoading] = useState(false);
+  const [loadingText, setLoadingText] = useState(false);
 
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -92,7 +93,7 @@ const EventOverview = ({ eventId }) => {
       toast.warning("Select a ticket type");
       return;
     }
-
+    setLoadingText(true);
     try {
       // 1️⃣ Check availability
       const checkRes = await api.post(
@@ -144,6 +145,7 @@ const EventOverview = ({ eventId }) => {
       );
 
       setClientSecret(paymentRes.data.clientSecret);
+      setLoadingText(false);
     } catch (error) {
       const message =
         error.response?.data?.message ||
@@ -188,7 +190,7 @@ const EventOverview = ({ eventId }) => {
   if (!event) {
     return (
       <div className="flex h-[80vh] items-center justify-center text-lime-600">
-        <ClipLoader color="#00897B" size="40" />
+        <ClipLoader color="#00897B" size="40px" />
       </div>
     );
   }
@@ -338,7 +340,7 @@ const EventOverview = ({ eventId }) => {
                         }
                         onClick={handleProceedToPay}
                         className="mt-6 bg-blue-600 text-white px-6 py-3 rounded">
-                        Proceed to Payment
+                        {loadingText ? "Loading..." : "Proceed to Payment"}
                       </button>
                     ) : (
                       <Elements

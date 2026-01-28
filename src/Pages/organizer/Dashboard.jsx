@@ -72,50 +72,50 @@ const Dashboard = () => {
             Dashboard
           </h1>
 
-          <div class="grid grid-cols-1 gap-5 sm:grid-cols-4 mt-4">
-            <div class="bg-white overflow-hidden shadow sm:rounded-lg dark:bg-gray-900">
-              <div class="px-4 py-5 sm:p-6">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-4 mt-4">
+            <div className="bg-white overflow-hidden shadow sm:rounded-lg dark:bg-gray-900">
+              <div className="px-4 py-5 sm:p-6">
                 <dl>
-                  <dt class="text-sm leading-5 font-medium text-gray-500 truncate dark:text-gray-400">
+                  <dt className="text-sm leading-5 font-medium text-gray-500 truncate dark:text-gray-400">
                     Total Events
                   </dt>
-                  <dd class="mt-1 text-3xl leading-9 font-semibold text-teal-600 dark:text-indigo-400">
+                  <dd className="mt-1 text-3xl leading-9 font-semibold text-teal-600 dark:text-indigo-400">
                     {dashboardData?.totalEvents || 0}
                   </dd>
                 </dl>
               </div>
             </div>
-            <div class="bg-white overflow-hidden shadow sm:rounded-lg dark:bg-gray-900">
-              <div class="px-4 py-5 sm:p-6">
+            <div className="bg-white overflow-hidden shadow sm:rounded-lg dark:bg-gray-900">
+              <div className="px-4 py-5 sm:p-6">
                 <dl>
-                  <dt class="text-sm leading-5 font-medium text-gray-500 truncate dark:text-gray-400">
+                  <dt className="text-sm leading-5 font-medium text-gray-500 truncate dark:text-gray-400">
                     Total Attendee
                   </dt>
-                  <dd class="mt-1 text-3xl leading-9 font-semibold text-teal-600 dark:text-indigo-400">
+                  <dd className="mt-1 text-3xl leading-9 font-semibold text-teal-600 dark:text-indigo-400">
                     {dashboardData?.totalAttendees || 0}
                   </dd>
                 </dl>
               </div>
             </div>
-            <div class="bg-white overflow-hidden shadow sm:rounded-lg dark:bg-gray-900">
-              <div class="px-4 py-5 sm:p-6">
+            <div className="bg-white overflow-hidden shadow sm:rounded-lg dark:bg-gray-900">
+              <div className="px-4 py-5 sm:p-6">
                 <dl>
-                  <dt class="text-sm leading-5 font-medium text-gray-500 truncate dark:text-gray-400">
+                  <dt className="text-sm leading-5 font-medium text-gray-500 truncate dark:text-gray-400">
                     Total Registration
                   </dt>
-                  <dd class="mt-1 text-3xl leading-9 font-semibold text-teal-600 dark:text-indigo-400">
+                  <dd className="mt-1 text-3xl leading-9 font-semibold text-teal-600 dark:text-indigo-400">
                     {dashboardData?.totalRegistrations || 0}
                   </dd>
                 </dl>
               </div>
             </div>
-            <div class="bg-white overflow-hidden shadow sm:rounded-lg dark:bg-gray-900">
-              <div class="px-4 py-5 sm:p-6">
+            <div className="bg-white overflow-hidden shadow sm:rounded-lg dark:bg-gray-900">
+              <div className="px-4 py-5 sm:p-6">
                 <dl>
-                  <dt class="text-sm leading-5 font-medium text-gray-500 truncate dark:text-gray-400">
+                  <dt className="text-sm leading-5 font-medium text-gray-500 truncate dark:text-gray-400">
                     Total Revenue
                   </dt>
-                  <dd class="mt-1 text-3xl leading-9 font-semibold text-teal-600 dark:text-indigo-400">
+                  <dd className="mt-1 text-3xl leading-9 font-semibold text-teal-600 dark:text-indigo-400">
                     {dashboardData?.totalRevenue || 0}
                   </dd>
                 </dl>
