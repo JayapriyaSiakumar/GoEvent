@@ -150,7 +150,7 @@ const Events = () => {
             <div className="flex justify-center items-center w-full h-[60vh]">
               {" "}
               <h2 className="text-2xl font-bold text-gray-800">
-                No Events Found.
+                No Events Published Yet.
               </h2>
             </div>
           ) : (
