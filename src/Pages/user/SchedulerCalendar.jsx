@@ -65,7 +65,7 @@ const SchedulerCalendar = () => {
   }
 
   return (
-    <div className="bg-white mt-14 max-w-6xl p-10 rounded-lg shadow">
+    <div className="bg-white mt-14 max-w-6xl p-10 flex justify-center items-center h-screen rounded-lg shadow">
       <h2 className="text-xl font-semibold mb-4">📅 All Events Schedule</h2>
 
       <FullCalendar
