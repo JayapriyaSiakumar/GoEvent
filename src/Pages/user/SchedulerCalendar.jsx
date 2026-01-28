@@ -65,30 +65,41 @@ const SchedulerCalendar = () => {
   }
 
   return (
-    <div className="bg-white mt-14  flex items-center flex-col justify-center w-full rounded-lg ">
-      <div className="grid grid-cols-1 gap-4 m-auto  p-10  max-w-6xl">
-        <h2 className="text-xl font-semibold mb-4">📅 All Events Schedule</h2>
-
-        <FullCalendar
-          plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-          initialView="dayGridMonth"
-          headerToolbar={{
-            left: "prev,next today",
-            center: "title",
-            right: "dayGridMonth,timeGridWeek",
-          }}
-          events={events}
-          eventClick={(info) => {
-            alert(
-              `🎫 Event: ${info.event.extendedProps.eventTitle}
+    <div className="bg-white mt-14 p-10  w-full rounded-lg max-w-7xl mx-auto">
+      <h2 className="text-xl font-semibold mb-4">📅 All Events Schedule</h2>
+      {events?.length === 0 ? (
+        <>
+          <div className="bg-white p-6 rounded-xl w-full">
+            <div className=" flex flex-col justify-center items-center w-full h-75">
+              <h3 className="text-2xl">No Data Found</h3>
+            </div>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="grid grid-cols-1 gap-4 m-auto  p-10  max-w-6xl">
+            <FullCalendar
+              plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+              initialView="dayGridMonth"
+              headerToolbar={{
+                left: "prev,next today",
+                center: "title",
+                right: "dayGridMonth,timeGridWeek",
+              }}
+              events={events}
+              eventClick={(info) => {
+                alert(
+                  `🎫 Event: ${info.event.extendedProps.eventTitle}
 📌 Session: ${info.event.title}
 🎤 Speaker: ${info.event.extendedProps.speaker || "N/A"}
 📝 ${info.event.extendedProps.description || "No description"}`,
-            );
-          }}
-          height="auto"
-        />
-      </div>
+                );
+              }}
+              height="auto"
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 };

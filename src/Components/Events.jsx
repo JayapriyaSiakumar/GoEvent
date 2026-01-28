@@ -44,6 +44,7 @@ const Events = () => {
       const res = await api.get("/event/all-events");
 
       dispatch(setEvents(res.data.events));
+      setLoading(false);
     } catch (err) {
       setError("Failed to load all events", err);
       toast.error(err.response.data.message);
@@ -57,6 +58,7 @@ const Events = () => {
       const res = await api.get("/event/all-published-events");
 
       dispatch(setEvents(res.data.events));
+      setLoading(false);
     } catch (err) {
       setError("Failed to load all events", err);
       toast.error(
@@ -88,7 +90,7 @@ const Events = () => {
   if (error) return <p className="text-center text-red-500">{error}</p>;
 
   return (
-    <div className="p-4 mt-14">
+    <div className="mt-14 max-w-7xl mx-auto">
       <div className="p-6 ">
         {/* <div className="p-4 sm:ml-54 mt-14">
       <div className="p-6 border border-default  rounded-lg border-gray-300 min-h-screen">  */}
@@ -145,7 +147,7 @@ const Events = () => {
 
         <div className="">
           {filteredEvents.length === 0 ? (
-            <div className="flex justify-center items-center w-full">
+            <div className="flex justify-center items-center w-full h-[60vh]">
               {" "}
               <h2 className="text-2xl font-bold text-gray-800">
                 No Events Found.
