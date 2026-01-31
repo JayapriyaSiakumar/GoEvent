@@ -34,8 +34,8 @@ const ResetPassword = () => {
 
   return (
     <div>
-      <div className="w-full bg-linear-to-br from-purple-950 via-purple-800 to-purple-950  mx-auto p-6">
-        <div className="mt-7 max-w-md bg-white  rounded-xl shadow-lg dark:bg-gray-800 dark:border-gray-700 border-2 border-indigo-300">
+      <div className="w-full bg-linear-to-br from-purple-950 via-purple-800 to-purple-950 h-screen  p-6">
+        <div className="mt-7 max-w-md mx-auto bg-white  rounded-xl shadow-lg dark:bg-gray-800 dark:border-gray-700 border-2 border-indigo-300">
           <div className="p-4 sm:p-7">
             <div className="text-center">
               <h1 className="block text-2xl font-bold text-gray-800 dark:text-white">
