@@ -78,7 +78,7 @@ export default function RevenueChart({ data }) {
         <CartesianGrid strokeDasharray="3 3" />
         <Tooltip cursor={{ fillOpacity: 0.5 }} />
 
-        <XAxis dataKey="eventName" />
+        <XAxis dataKey="shortName" />
         <YAxis />
 
         <Bar

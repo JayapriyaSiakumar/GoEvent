@@ -1,4 +1,3 @@
-// components/charts/PaymentBarChart.jsx
 import {
   BarChart,
   Bar,
