@@ -77,6 +77,21 @@ const EditEvent = () => {
       setFormData({ ...formData, [name]: value });
     }
     //console.log(formData);
+    // Prevent endDate < startDate
+    if (
+      name === "endDate" &&
+      formData.startDate &&
+      value < formData.startDate
+    ) {
+      alert("End date cannot be earlier than start date");
+      return;
+    }
+
+    // Prevent startDate > endDate
+    if (name === "startDate" && formData.endDate && value > formData.endDate) {
+      alert("Start date cannot be after end date");
+      return;
+    }
   };
 
   // Handle location fields
@@ -257,7 +272,9 @@ const EditEvent = () => {
               <input
                 type="date"
                 name="endDate"
-                min={new Date().toISOString().split("T")[0]}
+                min={
+                  formData.startDate || new Date().toISOString().split("T")[0]
+                }
                 value={formatDate(formData.endDate)}
                 placeholder="Enter End Date and Time"
                 onChange={handleChange}
