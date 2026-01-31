@@ -3,7 +3,7 @@ import api from "../../Services/api";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { toDateTimeLocal } from "../../Utils/date";
+//import { toDateTimeLocal } from "../../Utils/date";
 
 const EditEvent = () => {
   const [loading, setLoading] = useState(false);
@@ -154,6 +154,7 @@ const EditEvent = () => {
       setLoading(false);
     }
   };
+  const formatDate = (date) => date?.split("T")[0];
 
   return (
     <div className="p-4  mt-14">
@@ -239,9 +240,10 @@ const EditEvent = () => {
                 Start
               </label>
               <input
-                type="datetime-local"
+                type="date"
                 name="startDate"
-                value={toDateTimeLocal(formData.startDate)}
+                min={new Date().toISOString().split("T")[0]}
+                value={formatDate(formData.startDate)}
                 placeholder="Enter Start Date and Time"
                 onChange={handleChange}
                 required
@@ -253,9 +255,10 @@ const EditEvent = () => {
                 End
               </label>
               <input
-                type="datetime-local"
+                type="date"
                 name="endDate"
-                value={toDateTimeLocal(formData.endDate)}
+                min={new Date().toISOString().split("T")[0]}
+                value={formatDate(formData.endDate)}
                 placeholder="Enter End Date and Time"
                 onChange={handleChange}
                 required

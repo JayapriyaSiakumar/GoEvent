@@ -1,135 +1,113 @@
 import React, { useEffect, useState } from "react";
-import Events from "../../Components/Events";
-import Sidebar from "../../Components/sidebar/Sidebar";
-import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
-import api from "../../Services/api";
+import { toast } from "react-toastify";
+
+import Sidebar from "../../Components/sidebar/Sidebar";
 import PaymentChart from "../admin/PaymentChart";
 import RevenueChart from "../admin/RevenueChart";
+import api from "../../Services/api";
+
+const AnalyticsStatCard = ({ label, value }) => (
+  <div className="bg-white dark:bg-gray-900 rounded-xl p-5 shadow-sm hover:shadow-md transition-all border border-gray-100 dark:border-gray-800">
+    <div className="flex justify-between items-center">
+      <p className="text-gray-500 dark:text-gray-400 text-sm font-medium">
+        {label}
+      </p>
+      <span className="text-xs text-teal-600 dark:text-indigo-400 bg-teal-100 dark:bg-indigo-500/20 px-2 py-1 rounded-md">
+        LIVE
+      </span>
+    </div>
+
+    <p className="text-3xl font-bold text-gray-900 dark:text-white mt-2">
+      {value ?? 0}
+    </p>
+
+    <div className="mt-3 flex items-center gap-2 text-sm text-green-600 dark:text-green-400">
+      <span>▲</span>
+      <span>Trending</span>
+    </div>
+  </div>
+);
 
 const Dashboard = () => {
-  const [dashboardData, setDashboardData] = useState();
+  const [dashboardData, setDashboardData] = useState(null);
   const [paymentChart, setPaymentChart] = useState([]);
   const [revenueChart, setRevenueChart] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const { token } = useSelector((state) => state.auth);
 
-  const fetchData = async () => {
+  const loadDashboardData = async () => {
     try {
-      const response = await api.get(`/dashboard/stats`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      setLoading(true);
 
-      setDashboardData(response.data.data);
-      //toast.success("Dashboard Data Fetched Successfully");
-    } catch (error) {
-      toast.error("Something Went Wrong", error);
-    }
-  };
+      const headers = { Authorization: `Bearer ${token}` };
 
-  const fetchPaymentChart = async () => {
-    try {
-      const response = await api.get(`/dashboard/payments-chart`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const [stats, payment, revenue] = await Promise.all([
+        api.get("/dashboard/stats", { headers }),
+        api.get("/dashboard/payments-chart", { headers }),
+        api.get("/dashboard/revenue-chart", { headers }),
+      ]);
 
-      setPaymentChart(response.data.data);
-      //toast.success("Dashboard Data Fetched Successfully");
-    } catch (error) {
-      toast.error("Something Went Wrong", error);
-    }
-  };
-  const fetchRevenueChart = async () => {
-    try {
-      const response = await api.get(`/dashboard/revenue-chart`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      setRevenueChart(response.data.data);
-      //toast.success("Dashboard Data Fetched Successfully");
-    } catch (error) {
-      toast.error("Something Went Wrong", error);
+      setDashboardData(stats.data.data);
+      setPaymentChart(payment.data.data);
+      setRevenueChart(revenue.data.data);
+    } catch (err) {
+      toast.error("Failed to load dashboard data", err);
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchData();
-    fetchPaymentChart();
-    fetchRevenueChart();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    loadDashboardData();
   }, []);
+
   return (
     <>
       <Sidebar />
-      <div className="p-4  mt-14">
-        <div className="p-6  min-h-screen">
-          <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">
-            Dashboard
-          </h1>
 
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-4 mt-4">
-            <div className="bg-white overflow-hidden shadow sm:rounded-lg dark:bg-gray-900">
-              <div className="px-4 py-5 sm:p-6">
-                <dl>
-                  <dt className="text-sm leading-5 font-medium text-gray-500 truncate dark:text-gray-400">
-                    Total Events
-                  </dt>
-                  <dd className="mt-1 text-3xl leading-9 font-semibold text-teal-600 dark:text-indigo-400">
-                    {dashboardData?.totalEvents || 0}
-                  </dd>
-                </dl>
-              </div>
-            </div>
-            <div className="bg-white overflow-hidden shadow sm:rounded-lg dark:bg-gray-900">
-              <div className="px-4 py-5 sm:p-6">
-                <dl>
-                  <dt className="text-sm leading-5 font-medium text-gray-500 truncate dark:text-gray-400">
-                    Total Attendee
-                  </dt>
-                  <dd className="mt-1 text-3xl leading-9 font-semibold text-teal-600 dark:text-indigo-400">
-                    {dashboardData?.totalAttendees || 0}
-                  </dd>
-                </dl>
-              </div>
-            </div>
-            <div className="bg-white overflow-hidden shadow sm:rounded-lg dark:bg-gray-900">
-              <div className="px-4 py-5 sm:p-6">
-                <dl>
-                  <dt className="text-sm leading-5 font-medium text-gray-500 truncate dark:text-gray-400">
-                    Total Registration
-                  </dt>
-                  <dd className="mt-1 text-3xl leading-9 font-semibold text-teal-600 dark:text-indigo-400">
-                    {dashboardData?.totalRegistrations || 0}
-                  </dd>
-                </dl>
-              </div>
-            </div>
-            <div className="bg-white overflow-hidden shadow sm:rounded-lg dark:bg-gray-900">
-              <div className="px-4 py-5 sm:p-6">
-                <dl>
-                  <dt className="text-sm leading-5 font-medium text-gray-500 truncate dark:text-gray-400">
-                    Total Revenue
-                  </dt>
-                  <dd className="mt-1 text-3xl leading-9 font-semibold text-teal-600 dark:text-indigo-400">
-                    {dashboardData?.totalRevenue || 0}
-                  </dd>
-                </dl>
-              </div>
-            </div>
+      <div className="p-6 mt-14 bg-gray-50 dark:bg-gray-950 min-h-screen">
+        <h1 className="text-3xl font-semibold text-gray-900 dark:text-white mb-6">
+          Analytics Dashboard
+        </h1>
+
+        {/* Stats Section */}
+        {!loading && dashboardData && (
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <AnalyticsStatCard
+              label="Total Events"
+              value={dashboardData.totalEvents}
+            />
+            <AnalyticsStatCard
+              label="Total Attendees"
+              value={dashboardData.totalAttendees}
+            />
+            <AnalyticsStatCard
+              label="Total Registrations"
+              value={dashboardData.totalRegistrations}
+            />
+            <AnalyticsStatCard
+              label="Total Revenue"
+              value={dashboardData.totalRevenue}
+            />
           </div>
-          {/*  Charts */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className=" p-2">
-              {paymentChart && <PaymentChart data={paymentChart} />}
-            </div>
-            <div className=" p-2">
-              {revenueChart && <RevenueChart data={revenueChart} />}
-            </div>
+        )}
+
+        {/* Charts Section */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="bg-white dark:bg-gray-900  border border-gray-100 dark:border-gray-800 rounded-xl">
+            {/* <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-3">
+              Payment Analytics
+            </h2> */}
+            <PaymentChart data={paymentChart} />
+          </div>
+
+          <div className="bg-white dark:bg-gray-900  border border-gray-100 dark:border-gray-800 rounded-xl">
+            {/* <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-3">
+              Revenue Analytics
+            </h2> */}
+            <RevenueChart data={revenueChart} />
           </div>
         </div>
       </div>

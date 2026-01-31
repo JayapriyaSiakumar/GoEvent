@@ -52,6 +52,25 @@ const CreateEvent = () => {
     } else {
       setEventData({ ...eventData, [name]: value });
     }
+    // Prevent endDate < startDate
+    if (
+      name === "endDate" &&
+      eventData.startDate &&
+      value < eventData.startDate
+    ) {
+      alert("End date cannot be earlier than start date");
+      return;
+    }
+
+    // Prevent startDate > endDate
+    if (
+      name === "startDate" &&
+      eventData.endDate &&
+      value > eventData.endDate
+    ) {
+      alert("Start date cannot be after end date");
+      return;
+    }
   };
 
   // Handle location fields
@@ -221,8 +240,9 @@ const CreateEvent = () => {
                 Start
               </label>
               <input
-                type="datetime-local"
+                type="date"
                 name="startDate"
+                min={new Date().toISOString().split("T")[0]}
                 value={eventData.startDate}
                 placeholder="Enter Start Date and Time"
                 onChange={handleChange}
@@ -235,8 +255,11 @@ const CreateEvent = () => {
                 End
               </label>
               <input
-                type="datetime-local"
+                type="date"
                 name="endDate"
+                min={
+                  eventData.startDate || new Date().toISOString().split("T")[0]
+                }
                 value={eventData.endDate}
                 placeholder="Enter End Date and Time"
                 onChange={handleChange}

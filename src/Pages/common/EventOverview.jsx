@@ -247,10 +247,10 @@ const EventOverview = ({ eventId }) => {
                       <p className="text-sm font-medium">{event.description}</p>
                     </h2>
                     <h2 className="text-lg font-bold">
-                      Time:{" "}
+                      Date:{" "}
                       <span className="text-sm font-medium">
-                        {new Date(event.startDate).toLocaleString()} -
-                        {new Date(event.startDate).toLocaleString()}
+                        {new Date(event.startDate).toDateString()} -{" "}
+                        {new Date(event.startDate).toDateString()}
                       </span>
                     </h2>
                     {/* 
