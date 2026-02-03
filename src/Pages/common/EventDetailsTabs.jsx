@@ -4,6 +4,7 @@ import EventOverview from "./EventOverview";
 import EventSchedules from "./EventSchedules";
 import EventAttendees from "./EventAttendees";
 import EventPayments from "./EventPayments";
+import EventTickets from "./EventTickets";
 
 const EventDetailsTabs = ({ eventId }) => {
   const [activeTab, setActiveTab] = useState("overview");
@@ -44,6 +45,11 @@ const EventDetailsTabs = ({ eventId }) => {
               onClick={() => setActiveTab("payments")}>
               Payments
             </button>
+            <button
+              className={tabClasses("tickets")}
+              onClick={() => setActiveTab("tickets")}>
+              Tickets
+            </button>
           </>
         )}
       </div>
@@ -71,6 +77,11 @@ const EventDetailsTabs = ({ eventId }) => {
         {activeTab === "payments" && (
           <div>
             <EventPayments eventId={eventId} />
+          </div>
+        )}
+        {activeTab === "tickets" && (
+          <div>
+            <EventTickets eventId={eventId} />
           </div>
         )}
       </div>
