@@ -210,7 +210,7 @@ const EventOverview = ({ eventId }) => {
                     </span>
                   </h1>
 
-                  {role === "admin" ? (
+                  {role === "admin" && event.status === "pending" ? (
                     <>
                       <button
                         className="px-2 py-1 bg-lime-500 hover:bg-lime-600 text-white rounded-xl"
