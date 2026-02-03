@@ -12,19 +12,24 @@ export const formatDateTimeLocal = (dateString) => {
   return `${year}-${month}-${day}T ${hours}:${minutes}`;
 };
 
-export const formatTimeAMPM = (time) =>
-  new Date(time)
-    .toLocaleTimeString("en-IN", {
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: true,
-    })
-    .replace(":", ".");
+export const formatTimeAMPM = (dateString) => {
+  const d = new Date(dateString);
 
-export const toTimeInputValue = (date) => {
-  const d = new Date(date);
-  const hours = d.getHours().toString().padStart(2, "0");
-  const minutes = d.getMinutes().toString().padStart(2, "0");
+  let hour = d.getUTCHours();
+  const minutes = d.getUTCMinutes().toString().padStart(2, "0");
+
+  const ampm = hour >= 12 ? "PM" : "AM";
+  const hour12 = hour % 12 || 12;
+
+  return `${hour12}:${minutes} ${ampm}`;
+};
+
+export const toTimeInputValue = (dateString) => {
+  const d = new Date(dateString);
+
+  const hours = d.getUTCHours().toString().padStart(2, "0");
+  const minutes = d.getUTCMinutes().toString().padStart(2, "0");
+
   return `${hours}:${minutes}`;
 };
 
