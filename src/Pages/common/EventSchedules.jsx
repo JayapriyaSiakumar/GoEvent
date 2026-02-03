@@ -57,6 +57,7 @@ const EventSchedules = ({ eventId }) => {
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
+
     setFormData((prevFormData) => ({
       ...prevFormData,
       [name]: value,
@@ -64,6 +65,14 @@ const EventSchedules = ({ eventId }) => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (
+      formData.endTime &&
+      formData.startTime &&
+      formData.endTime <= formData.startTime
+    ) {
+      alert("End time must be later than start time");
+      return;
+    }
     try {
       const url = editingScheduleId
         ? `/schedule/update/${editingScheduleId}`
@@ -274,6 +283,7 @@ const EventSchedules = ({ eventId }) => {
                       name="endTime"
                       value={formData.endTime}
                       onChange={handleOnChange}
+                      min={formData.startTime}
                       className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                       placeholder="Enter End Time"
                       required
