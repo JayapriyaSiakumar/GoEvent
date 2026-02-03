@@ -81,6 +81,7 @@ const SchedulerCalendar = () => {
             <FullCalendar
               plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
               initialView="dayGridMonth"
+              timeZone="UTC"
               headerToolbar={{
                 left: "prev,next today",
                 center: "title",
