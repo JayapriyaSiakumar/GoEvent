@@ -169,13 +169,14 @@ const MyBookings = () => {
                         </span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {booking.bookingStatus === "confirmed" && (
-                          <button
-                            onClick={() => cancelHandler(booking._id)}
-                            className="mt-2 bg-red-500 text-white px-3 py-1 rounded">
-                            Cancel Booking
-                          </button>
-                        )}
+                        {booking.bookingStatus === "confirmed" &&
+                          booking.event.status === "published" && (
+                            <button
+                              onClick={() => cancelHandler(booking._id)}
+                              className="mt-2 bg-red-500 text-white px-3 py-1 rounded">
+                              Cancel Booking
+                            </button>
+                          )}
                       </td>
                     </tr>
                   ))}
