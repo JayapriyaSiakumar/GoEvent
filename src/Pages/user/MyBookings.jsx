@@ -47,7 +47,23 @@ const MyBookings = () => {
     loadBookings();
   }, [dispatch, token]);
 
-  const cancelHandler = async (id) => {
+  const updateEventStatus = async (eventId, status) => {
+    try {
+      await api.patch(
+        `/event/status/${eventId}`,
+        { status: status },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        },
+      );
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
+  const cancelHandler = async (id, eventId) => {
     if (!window.confirm("Are you sure you want to cancel this booking?"))
       return;
     try {
@@ -55,6 +71,7 @@ const MyBookings = () => {
       toast.success(
         response.message || "Booking cancelled & refund initiated 💸",
       );
+      updateEventStatus(eventId, "published");
       dispatch(cancelBookingSuccess(id));
     } catch (error) {
       toast.error(error.response?.data?.message || "Failed to cancel booking");
@@ -170,9 +187,12 @@ const MyBookings = () => {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         {booking.bookingStatus === "confirmed" &&
-                          booking.event.status === "published" && (
+                          (booking.event.status === "published" ||
+                            booking.event.status === "sold-out") && (
                             <button
-                              onClick={() => cancelHandler(booking._id)}
+                              onClick={() =>
+                                cancelHandler(booking._id, booking.event._id)
+                              }
                               className="mt-2 bg-red-500 text-white px-3 py-1 rounded">
                               Cancel Booking
                             </button>
